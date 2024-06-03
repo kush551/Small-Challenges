@@ -24,3 +24,4 @@ else:  # Calculating the value of Pn
         Pn_2 = Pn_1
         Pn_1 = Pn
     print(Pn)
+
