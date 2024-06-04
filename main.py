@@ -1,12 +1,34 @@
 # Importing the necessary libraries
 from fractions import Fraction
+import re
 
-# Getting user input for the sum, product, and n value
-Poly_sum = Fraction(input("Enter the sum of polynomial: "))
-product = Fraction(input("Enter the product of polynomial: "))
-n = int(input("Enter the value of n: "))  # Convert input to integer
+# Getting user input for the quadratic equation and n value
+Quad_eq = input("Enter the quadratic equation in the form ax^2 + bx + c: ")
+n = int(input("Enter the value of n: "))
 
-# Giving values to some integers
+Quad_eq = Quad_eq.replace(" ", "")  # Remove any spaces from the equation
+
+# Define the regular expression pattern to find the value of (a, b, c)
+pattern = r'([-+]?\d*\.?\d*)x\^2([-+]?\d*\.?\d*)x([-+]?\d*\.?\d*)'
+
+# Check if the equation matches the pattern
+match = re.match(pattern, Quad_eq)
+if not match:
+    raise ValueError("The equation is not in the correct format.")
+
+# Extract the coefficients
+a_str, b_str, c_str = match.groups()
+
+# Convert string to integers, with appropriate default values for empty strings
+a = int(a_str) if a_str else 1
+b = int(b_str) if b_str else 1
+c = int(c_str)
+
+# Calculating the sum and product of the polynomial
+Poly_sum = Fraction(-b, a)
+product = Fraction(c, a)
+
+# Giving values to some constant integers
 P0 = 2
 P1 = Poly_sum
 
